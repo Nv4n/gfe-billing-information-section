@@ -20,11 +20,11 @@ const CardSchema = z.object({
 		.nonempty(`Card expiry ${ERROR_SUFIX}`)
 		.regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "Invalid expiry date")
 		.refine((val) => {
-			const [month, year] = val.split(" \/ ");
+			const [month, year] = val.split("\/");
 			const currentDate = new Date();
 			const currentMonth = currentDate.getMonth() + 1;
 			const currentYear = currentDate.getFullYear() % 100;
-			return (
+			return !(
 				(+month <= currentMonth && +year === currentYear) ||
 				+year < currentYear
 			);
@@ -43,9 +43,7 @@ const CardUserDataSchema = z.object({
 		.string()
 		.trim()
 		.nonempty(`Country ${ERROR_SUFIX}`)
-		.min(2, "Too short")
-		.max(60, "Too long")
-		.regex(/^[A-Z][a-z]+( [A-Z][a-z]+)*$/, "Invalid country name"),
+		.regex(/^[A-Z]{3}$/, "Invalid country name"),
 	street: z.string().trim().nonempty(`Street ${ERROR_SUFIX}`),
 	apartment: z
 		.string()
