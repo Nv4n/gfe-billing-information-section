@@ -43,20 +43,9 @@ export function PaymentDetails() {
 										customInput={InputGroupInput}
 										aria-invalid={fieldState.invalid}
 										placeholder="1234 1234 1234 1234"
+										inputMode="numeric"
 										format={"#### #### #### ####"}
 									/>
-									{/* <InputGroupInput
-										{...field}
-										id="rhf-card-number"
-										aria-invalid={fieldState.invalid}
-										placeholder="1234 1234 1234 1234"
-										maxLength={19}
-										onChange={({ target: { value } }) => {
-											const formatted =
-												formatCardNumber(value);
-											field.onChange(formatted);
-										}}
-									/> */}
 									<InputGroupAddon>
 										<div className="border rounded w-8 h-6 flex justify-center">
 											<CreditCard />
@@ -104,17 +93,14 @@ export function PaymentDetails() {
 									<StyledLabel htmlFor="rhf-expiry">
 										Expiry
 									</StyledLabel>
-									<Input
+									<PatternFormat
 										{...field}
+										customInput={Input}
 										id="rhf-expiry"
 										aria-invalid={fieldState.invalid}
 										placeholder="MM/YY"
-										maxLength={5}
-										onChange={({ target: { value } }) => {
-											const formatted =
-												formatExpiry(value);
-											field.onChange(formatted);
-										}}
+										inputMode="numeric"
+										format={"##/##"}
 									/>
 									{fieldState.invalid && (
 										<FieldError
@@ -132,20 +118,14 @@ export function PaymentDetails() {
 									<StyledLabel htmlFor="rhf-cvv">
 										CVV
 									</StyledLabel>
-									<Input
+									<PatternFormat
 										{...field}
+										customInput={Input}
 										id="rhf-cvv"
 										aria-invalid={fieldState.invalid}
 										placeholder="123"
 										inputMode="numeric"
-										maxLength={3}
-										onChange={({ target: { value } }) => {
-											const formatted = formatDigitsOnly(
-												value,
-												3,
-											);
-											field.onChange(formatted);
-										}}
+										format="###"
 									/>
 									{fieldState.invalid && (
 										<FieldError

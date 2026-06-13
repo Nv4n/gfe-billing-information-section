@@ -19,6 +19,7 @@ import {
 import { CardData } from "@/types/card";
 import { formatDigitsOnly } from "@/utils/digits-only-formatter";
 import { Controller, useFormContext } from "react-hook-form";
+import { PatternFormat } from "react-number-format";
 
 const COUNTRIES = [{ value: "BGR", label: "Bulgaria" }];
 
@@ -151,20 +152,13 @@ export function AddressDetails() {
 									<StyledLabel htmlFor="rhf-state">
 										Zip
 									</StyledLabel>
-									<Input
+									<PatternFormat
 										{...field}
 										id="rhf-state"
 										aria-invalid={fieldState.invalid}
 										placeholder="1234"
-										maxLength={4}
 										inputMode="numeric"
-										onChange={({ target: { value } }) => {
-											const formatted = formatDigitsOnly(
-												value,
-												4,
-											);
-											field.onChange(formatted);
-										}}
+										format="####"
 									/>
 									{fieldState.invalid && (
 										<FieldError
