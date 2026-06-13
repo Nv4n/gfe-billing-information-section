@@ -18,7 +18,7 @@ const CardSchema = z.object({
 		.string()
 		.trim()
 		.nonempty(`Card expiry ${ERROR_SUFIX}`)
-		.regex(/^(0[1-9]|1[0-2]) \/ \d{2}$/, "Invalid expiry date")
+		.regex(/^(0[1-9]|1[0-2])\/\d{2}$/, "Invalid expiry date")
 		.refine((val) => {
 			const [month, year] = val.split(" \/ ");
 			const currentDate = new Date();
