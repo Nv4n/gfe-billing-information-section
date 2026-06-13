@@ -1,4 +1,4 @@
-import { CardInfoForm } from "@/app/_components/card-info-form";
+import { CardInfoForm } from "@/app/_components/card-info-form/card-info-form";
 import {
 	Card,
 	CardContent,
@@ -9,7 +9,7 @@ import {
 
 export default function Home() {
 	return (
-		<Card className="px-4 py-16">
+		<Card className="lg:px-28 sm:px-8 py-16">
 			<CardHeader>
 				<CardTitle className="font-semibold text-xl text-neutral-900">Billing Information</CardTitle>
 				<CardDescription className="font-normal text-sm text-neutral-500">
