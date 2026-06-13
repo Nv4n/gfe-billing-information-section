@@ -24,6 +24,7 @@ export function CardInfoForm() {
 			city: "",
 			zip: "",
 		},
+		mode: "onBlur",
 	});
 
 	function onSubmit(data: CardData) {
@@ -45,7 +46,10 @@ export function CardInfoForm() {
 
 	return (
 		<FormProvider {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)}>
+			<form
+				onSubmit={form.handleSubmit(onSubmit)}
+				className="gap-4 sm:gap-6 flex flex-col"
+			>
 				<FieldGroup>
 					<PaymentDetails />
 					<FieldSeparator />
@@ -53,7 +57,7 @@ export function CardInfoForm() {
 					<FieldSeparator />
 					<AddressDetails />
 				</FieldGroup>
-				<Field orientation={"horizontal"}>
+				<Field orientation={"horizontal"} className="py-4">
 					<Button
 						disabled={
 							!form.formState.isDirty || !form.formState.isValid

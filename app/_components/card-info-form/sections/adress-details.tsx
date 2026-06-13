@@ -154,6 +154,7 @@ export function AddressDetails() {
 									</StyledLabel>
 									<PatternFormat
 										{...field}
+										customInput={Input}
 										id="rhf-state"
 										aria-invalid={fieldState.invalid}
 										placeholder="1234"
