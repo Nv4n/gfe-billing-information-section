@@ -2,7 +2,7 @@ import z from "zod";
 
 const ERROR_SUFIX = "is required";
 
-const CardSchema = z.object({
+const CardDataSchema = z.object({
 	cardNumber: z
 		.string()
 		.trim()
@@ -64,6 +64,28 @@ const CardUserDataSchema = z.object({
 		.regex(/^\d{4}$/, "Invalid zip code"),
 });
 
-export const CardDataSchema = CardSchema.and(CardUserDataSchema);
+export const CardFormSchema = z.object({
+	...CardDataSchema.shape,
+	...CardUserDataSchema.shape,
+});
 
-export type CardData = z.infer<typeof CardDataSchema>;
+export type CardForm = z.infer<typeof CardFormSchema>;
+
+export const CardDatabaseSchema = CardFormSchema.extend(
+	z.object({
+		cardNumber: CardFormSchema.shape.cardNumber.transform(
+			(val) => +val.replaceAll(" ", ""),
+		),
+		cvv: CardFormSchema.shape.cvv.transform((val) => +val),
+		zip: CardFormSchema.shape.zip.transform((val) => +val),
+		expiry: CardFormSchema.shape.expiry.transform((val) => {
+			const [month, year] = val.split("\/");
+			return new Date(`20${year}-${month}-01`);
+		}),
+		apartment: CardFormSchema.shape.apartment.transform(
+			(val) => val || null,
+		),
+	}).shape,
+);
+
+export type CardDatabaseData = z.output<typeof CardDatabaseSchema>;
