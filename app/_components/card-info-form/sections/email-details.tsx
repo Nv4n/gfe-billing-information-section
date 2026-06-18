@@ -7,11 +7,11 @@ import {
 	FieldError,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { CardForm } from "@/types/card";
+import { CardFormData } from "@/types/card";
 import { Controller, useFormContext } from "react-hook-form";
 
 export function EmailDetails() {
-	const formCtx = useFormContext<CardForm>();
+	const formCtx = useFormContext<CardFormData>();
 	return (
 		<FieldSet>
 			<div className="sm:grid sm:grid-cols-3 sm:gap-8">

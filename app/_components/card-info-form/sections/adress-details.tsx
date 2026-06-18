@@ -16,7 +16,7 @@ import {
 	SelectTrigger,
 	SelectValue,
 } from "@/components/ui/select";
-import { CardForm } from "@/types/card";
+import { CardFormData } from "@/types/card";
 import { formatDigitsOnly } from "@/utils/digits-only-formatter";
 import { Controller, useFormContext } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
@@ -24,7 +24,7 @@ import { PatternFormat } from "react-number-format";
 const COUNTRIES = [{ value: "BGR", label: "Bulgaria" }];
 
 export function AddressDetails() {
-	const formCtx = useFormContext<CardForm>();
+	const formCtx = useFormContext<CardFormData>();
 	return (
 		<FieldSet>
 			<div className="sm:grid sm:grid-cols-3 sm:gap-8">

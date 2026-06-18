@@ -12,14 +12,14 @@ import {
 	InputGroupAddon,
 	InputGroupInput,
 } from "@/components/ui/input-group";
-import { CardForm } from "@/types/card";
+import { CardFormData } from "@/types/card";
 import { formaLettersOnly } from "@/utils/letters-only-formatter";
 import { CreditCard } from "lucide-react";
 import { Controller, useFormContext } from "react-hook-form";
 import { PatternFormat } from "react-number-format";
 
 export function PaymentDetails() {
-	const formCtx = useFormContext<CardForm>();
+	const formCtx = useFormContext<CardFormData>();
 	return (
 		<FieldSet>
 			<div className="sm:grid sm:grid-cols-3 sm:gap-8">
