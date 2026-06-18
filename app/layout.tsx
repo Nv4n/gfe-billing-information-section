@@ -42,7 +42,17 @@ export default function RootLayout({
 					<ErrorBoundary title="Card info form Error">
 						<main>{children}</main>
 					</ErrorBoundary>
-					<Toaster />
+					<Toaster
+						swipeDirections={["right", "left"]}
+						position="top-center"
+						toastOptions={{
+							style: {
+								background: "transparent",
+								border: "none",
+								boxShadow: "0 0 #0000",
+							},
+						}}
+					/>
 				</Providers>
 			</body>
 		</html>
