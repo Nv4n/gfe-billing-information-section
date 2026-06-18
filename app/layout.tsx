@@ -4,6 +4,8 @@ import { Noto_Sans, Noto_Sans_Mono } from "next/font/google";
 import "./globals.css";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Providers from "@/app/providers";
+import ErrorBoundary from "@/app/error-boundary";
+import { Toaster } from "sonner";
 
 const geist = Noto_Sans({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -37,7 +39,10 @@ export default function RootLayout({
 		>
 			<body className="flex min-h-full flex-col">
 				<Providers>
-					<main>{children}</main>
+					<ErrorBoundary title="Card info form Error">
+						<main>{children}</main>
+					</ErrorBoundary>
+					<Toaster />
 				</Providers>
 			</body>
 		</html>
