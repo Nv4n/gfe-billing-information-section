@@ -64,25 +64,25 @@ const CardUserDataSchema = z.object({
 		.regex(/^\d{4}$/, "Invalid zip code"),
 });
 
-export const CardFormSchema = z.object({
+export const CardFormDataSchema = z.object({
 	...CardDataSchema.shape,
 	...CardUserDataSchema.shape,
 });
 
-export type CardForm = z.infer<typeof CardFormSchema>;
+export type CardFormData = z.infer<typeof CardFormDataSchema>;
 
-export const CardDatabaseSchema = CardFormSchema.extend(
+export const CardDatabaseSchema = CardFormDataSchema.extend(
 	z.object({
-		cardNumber: CardFormSchema.shape.cardNumber.transform(
+		cardNumber: CardFormDataSchema.shape.cardNumber.transform(
 			(val) => +val.replaceAll(" ", ""),
 		),
-		cvv: CardFormSchema.shape.cvv.transform((val) => +val),
-		zip: CardFormSchema.shape.zip.transform((val) => +val),
-		expiry: CardFormSchema.shape.expiry.transform((val) => {
+		cvv: CardFormDataSchema.shape.cvv.transform((val) => +val),
+		zip: CardFormDataSchema.shape.zip.transform((val) => +val),
+		expiry: CardFormDataSchema.shape.expiry.transform((val) => {
 			const [month, year] = val.split("\/");
 			return new Date(`20${year}-${month}-01`);
 		}),
-		apartment: CardFormSchema.shape.apartment.transform(
+		apartment: CardFormDataSchema.shape.apartment.transform(
 			(val) => val || null,
 		),
 	}).shape,
