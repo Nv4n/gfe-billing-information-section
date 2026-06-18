@@ -1,31 +1,35 @@
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
-import { ToasterProps, toast as sonnerToast } from "sonner";
+import { toast as sonnerToast } from "sonner";
+import { id } from "zod/locales";
 
 interface ToastProps {
-	id: string | number;
 	description: string;
 	variant: "error" | "success";
 }
 
-function gfeToast(toast: Omit<ToastProps, "id">) {
-	return sonnerToast.custom((id) => (
-		<Toast
-			id={id}
-			description={toast.description}
-			variant={toast.variant}
-		/>
-	));
+export function gfeToast(toast: Omit<ToastProps, "id">) {
+	return sonnerToast(
+		<Toast description={toast.description} variant={toast.variant} />,
+	);
 }
 
 function Toast(props: ToastProps) {
 	const { description, variant } = props;
 
 	return (
-		<div className="flex items-center gap-3 font-medium">
+		<div
+			className={cn(
+				"flex items-center gap-3 font-medium rounded-full py-1 pl-1 pr-2.5",
+				variant === "error" ? "bg-red-50" : "bg-green-50",
+			)}
+		>
 			<Badge
+				variant={"secondary"}
 				className={
-					(cn("bg-background shadow"),
+					(cn(
+						"bg-zinc-50 dark:bg-zinc-50 px-2.5 py-0.5 shadow rounded-full ",
+					),
 					variant === "error" ? "text-red-800" : "text-green-700")
 				}
 			>
