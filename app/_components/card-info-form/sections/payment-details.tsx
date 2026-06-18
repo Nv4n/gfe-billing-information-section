@@ -1,29 +1,25 @@
 import { StyledLabel } from "@/components/styled-label";
 import {
-	FieldSet,
-	FieldLegend,
-	FieldGroup,
 	Field,
 	FieldError,
+	FieldGroup,
+	FieldLegend,
+	FieldSet,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import {
 	InputGroup,
-	InputGroupInput,
 	InputGroupAddon,
+	InputGroupInput,
 } from "@/components/ui/input-group";
-import { CardData } from "@/types/card";
-import { Controller, useFormContext } from "react-hook-form";
-import Image from "next/image";
-import { CreditCard } from "lucide-react";
-import { formatCardNumber } from "@/utils/card-info/card-number-formatter";
-import { formatExpiry } from "@/utils/card-info/expiry-date-formatter";
-import { formatDigitsOnly } from "@/utils/digits-only-formatter";
+import { CardForm } from "@/types/card";
 import { formaLettersOnly } from "@/utils/letters-only-formatter";
-import { NumericFormat, PatternFormat } from "react-number-format";
+import { CreditCard } from "lucide-react";
+import { Controller, useFormContext } from "react-hook-form";
+import { PatternFormat } from "react-number-format";
 
 export function PaymentDetails() {
-	const formCtx = useFormContext<CardData>();
+	const formCtx = useFormContext<CardForm>();
 	return (
 		<FieldSet>
 			<div className="sm:grid sm:grid-cols-3 sm:gap-8">

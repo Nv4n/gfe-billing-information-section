@@ -4,14 +4,14 @@ import { EmailDetails } from "@/app/_components/card-info-form/sections/email-de
 import { PaymentDetails } from "@/app/_components/card-info-form/sections/payment-details";
 import { Button } from "@/components/ui/button";
 import { Field, FieldGroup, FieldSeparator } from "@/components/ui/field";
-import { CardData, CardDataSchema } from "@/types/card";
+import { CardForm, CardFormSchema } from "@/types/card";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 export function CardInfoForm() {
-	const form = useForm<CardData>({
-		resolver: zodResolver(CardDataSchema),
+	const form = useForm<CardForm>({
+		resolver: zodResolver(CardFormSchema),
 		defaultValues: {
 			cardNumber: "",
 			cardHolder: "",
@@ -24,10 +24,11 @@ export function CardInfoForm() {
 			city: "",
 			zip: "",
 		},
-		mode: "onBlur",
+		mode: "onTouched",
 	});
 
-	function onSubmit(data: CardData) {
+	function onSubmit(data: CardForm) {
+		console.log(data);
 		toast("You submitted the following values:", {
 			description: (
 				<pre className="mt-2 w-[320px] overflow-x-auto rounded-md bg-code p-4 text-code-foreground">
